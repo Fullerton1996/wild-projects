@@ -3,7 +3,6 @@ import { Header } from './components/Header';
 import { InputForm } from './components/InputForm';
 import { OutputDisplay } from './components/OutputDisplay';
 import { generateContent } from './services/geminiService';
-import { SparklesIcon } from './components/icons/SparklesIcon';
 import type { FormData } from './types';
 
 const App: React.FC = () => {
@@ -34,8 +33,7 @@ const App: React.FC = () => {
           <InputForm onGenerate={handleGenerate} isLoading={isLoading} />
           
           <div className="mt-8 lg:mt-0">
-            <h2 className="text-xl font-semibold text-slate-700 mb-4 flex items-center">
-              <SparklesIcon className="w-6 h-6 mr-2 text-indigo-500" />
+            <h2 className="text-xl font-semibold text-slate-700 mb-4">
               Generated Content
             </h2>
             <OutputDisplay output={output} isLoading={isLoading} error={error} />
