@@ -67,7 +67,7 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ output, isLoading,
           <>
             <button
               onClick={handleCopy}
-              className="absolute top-3 right-3 p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors"
+              className="absolute top-3 right-3 p-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors z-10"
               aria-label="Copy to clipboard"
             >
               {copied ? (
@@ -76,7 +76,7 @@ export const OutputDisplay: React.FC<OutputDisplayProps> = ({ output, isLoading,
                 <ClipboardIcon className="w-5 h-5" />
               )}
             </button>
-            <div className="prose prose-sm max-w-none text-slate-800 whitespace-pre-wrap">
+            <div className="prose prose-sm max-w-none text-slate-800 whitespace-pre-wrap pr-12 pt-2">
               {formattedOutput}
             </div>
           </>

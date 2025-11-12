@@ -35,7 +35,7 @@ Follow these specific instructions for the Case Study:
   - Structure B: 1. Clear and concise introduction, 2. Context and goals, 3. What we did / how we did, 4. Impact
 - Entry Point: Start the case study with a compelling entry point. Consider one of these styles: Tiny moment, Tension first, Mid-action, Client quote/insight, or an Unexpected analogy.
 - Style: The writing style can be Punchy, a Reflection, Technical, or Personal & Authentic. Choose what fits best.
-- Credits: Include a section for "Credits and contributors" at the end, mentioning roles like Project Management, Design, and Development, and crediting partners.`;
+- Credits: Include a section for "Credits and contributors" at the end, mentioning roles like Project Management, Design, and Development, and crediting partners. List names directly without brackets (e.g., "Project Management: John Smith" not "Project Management: [Name]").`;
       break;
 
     case TemplateType.InstagramPost:
