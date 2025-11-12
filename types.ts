@@ -19,5 +19,6 @@ export interface FormData {
   projectURL: string;
   selectedTemplate: TemplateType;
   brandTones: string[];
+  brandVoices: string[];
   caseStudyExample: string;
 }

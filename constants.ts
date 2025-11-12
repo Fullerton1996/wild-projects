@@ -37,6 +37,12 @@ export const INITIAL_BRAND_TONES: string[] = [
   'Curious and forward-thinking',
 ];
 
+export const INITIAL_BRAND_VOICES: string[] = [
+  'Straightforward and clear',
+  'Playful but professional',
+  'Collaborative and inclusive',
+];
+
 export const TEMPLATE_OPTIONS: TemplateOption[] = [
   {
     id: TemplateType.CaseStudy,

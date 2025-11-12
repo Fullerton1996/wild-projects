@@ -3,7 +3,7 @@ import { SYSTEM_INSTRUCTION, TEMPLATE_OPTIONS } from '../constants';
 import { TemplateType, type FormData } from '../types';
 
 const getPromptForTemplate = (formData: FormData): string => {
-  const { userInput, clientName, projectURL, selectedTemplate, brandTones, caseStudyExample } = formData;
+  const { userInput, clientName, projectURL, selectedTemplate, brandTones, brandVoices, caseStudyExample } = formData;
   const template = TEMPLATE_OPTIONS.find(t => t.id === selectedTemplate);
 
   if (!template) {
@@ -12,6 +12,10 @@ const getPromptForTemplate = (formData: FormData): string => {
 
   let prompt = `Generate a "${template.label}" based on the following project details:\n---\n${userInput}\n---\n\n`;
   prompt += `Client Name: ${clientName || 'Not provided'}\n`;
+  
+  if (brandVoices.length > 0) {
+    prompt += `\nIn addition to the core brand voice, please emphasize these specific voice characteristics:\n- ${brandVoices.join('\n- ')}\n`;
+  }
   
   if (brandTones.length > 0) {
     prompt += `\nIn addition to the core brand tones, please emphasize these specific tones:\n- ${brandTones.join('\n- ')}\n`;

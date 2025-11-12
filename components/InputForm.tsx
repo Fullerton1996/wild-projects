@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { INITIAL_BRAND_TONES, TEMPLATE_OPTIONS } from '../constants';
+import { INITIAL_BRAND_TONES, INITIAL_BRAND_VOICES, TEMPLATE_OPTIONS } from '../constants';
 import { TemplateType, type FormData } from '../types';
 import { LoaderIcon } from './icons/LoaderIcon';
 import { XMarkIcon } from './icons/XMarkIcon';
@@ -16,6 +16,8 @@ export const InputForm: React.FC<InputFormProps> = ({ onGenerate, isLoading }) =
   const [selectedTemplate, setSelectedTemplate] = useState<TemplateType>(TemplateType.CaseStudy);
   const [brandTones, setBrandTones] = useState<string[]>(INITIAL_BRAND_TONES);
   const [newTone, setNewTone] = useState<string>('');
+  const [brandVoices, setBrandVoices] = useState<string[]>(INITIAL_BRAND_VOICES);
+  const [newVoice, setNewVoice] = useState<string>('');
   const [caseStudyExample, setCaseStudyExample] = useState<string>('');
 
 
@@ -36,10 +38,21 @@ export const InputForm: React.FC<InputFormProps> = ({ onGenerate, isLoading }) =
     setBrandTones(brandTones.filter((_, index) => index !== indexToRemove));
   };
 
+  const handleAddVoice = () => {
+    if (newVoice.trim() && !brandVoices.includes(newVoice.trim())) {
+      setBrandVoices([...brandVoices, newVoice.trim()]);
+      setNewVoice('');
+    }
+  };
+
+  const handleRemoveVoice = (indexToRemove: number) => {
+    setBrandVoices(brandVoices.filter((_, index) => index !== indexToRemove));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (userInput.trim()) {
-      onGenerate({ userInput, clientName, projectURL, selectedTemplate, brandTones, caseStudyExample });
+      onGenerate({ userInput, clientName, projectURL, selectedTemplate, brandTones, brandVoices, caseStudyExample });
     }
   };
 
@@ -89,6 +102,33 @@ export const InputForm: React.FC<InputFormProps> = ({ onGenerate, isLoading }) =
           />
         </div>
       )}
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700">Brand Voice Tags</label>
+        <div className="flex flex-wrap gap-2 mt-2">
+          {brandVoices.map((voice, index) => (
+            <div key={index} className="flex items-center bg-purple-100 text-purple-800 text-xs font-medium pl-2.5 pr-1 py-1 rounded-full">
+              {voice}
+              <button type="button" onClick={() => handleRemoveVoice(index)} className="ml-1.5 flex-shrink-0 bg-purple-200 hover:bg-purple-300 rounded-full p-0.5" aria-label={`Remove ${voice}`}>
+                <XMarkIcon className="h-3 w-3 text-purple-800" />
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="mt-2 flex">
+          <input
+            type="text"
+            value={newVoice}
+            onChange={(e) => setNewVoice(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleAddVoice(); } }}
+            placeholder="Add a custom voice..."
+            className="flex-grow block w-full rounded-l-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm placeholder:text-slate-400 px-3 py-2"
+          />
+          <button type="button" onClick={handleAddVoice} className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-slate-300 text-sm font-medium rounded-r-md text-slate-700 bg-slate-50 hover:bg-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+            Add
+          </button>
+        </div>
+      </div>
 
       <div>
         <label className="block text-sm font-medium text-slate-700">Brand Tone Tags</label>
